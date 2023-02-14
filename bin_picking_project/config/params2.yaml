@@ -1,0 +1,7 @@
+object_publisher:
+  ros__parameters:
+    img_file: "table_images/set_02.jpg"
+
+image_publisher:
+  ros__parameters:
+    img_file: "table_images/set_02.jpg"

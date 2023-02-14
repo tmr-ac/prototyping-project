@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bin_picker">
+
+  <xacro:property name="rot1_z" value="0.3991"/>
+  <xacro:property name="rot3_z" value="0.448"/>
+  <xacro:property name="rot4_z" value="0.042"/>
+  <xacro:property name="rot5_z" value="0.433"/>
+  <xacro:property name="rot6_x" value="0.082"/>
+  <xacro:property name="placeholder6" value="0"/>
+  <xacro:property name="placeholder7" value="0"/>
+
+
+  <link name="world"/>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/base.dae"/>       
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </visual>
+  </link>
+
+  <link name="body1">
+   <visual>
+    <geometry>
+      <mesh filename="package://bin_picking_project/urdf_model/meshes/body1.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+    </visual>
+  </link>
+
+  <link name="body2">
+  <visual>
+    <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/body2.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </visual>
+  </link>
+
+  <link name="body3">
+  <visual>
+    <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/body3.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </visual>
+  </link>
+  
+  <link name="body4">
+  <visual>
+    <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/body4.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 -1.5708 0"/>
+  </visual>
+  </link>
+
+  <link name="body5">
+  <visual>
+    <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/body5.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </visual>
+  </link>
+
+  <link name="body6">
+  <visual>
+    <geometry>
+        <mesh filename="package://bin_picking_project/urdf_model/meshes/body6.dae"/>       
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+  </visual>
+  </link>
+
+
+  <joint name="first" type="fixed">
+   <parent link="world"/>
+   <child link="base_link"/>
+   <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="rotation1" type="revolute">
+   <parent link="base_link"/>
+   <child link="body1"/>
+   <axis xyz="0 0 1"/>
+   <limit lower="-2.96706" upper="2.96706" effort="10.0" velocity="5.0"/>
+   <origin xyz="0 0 0.3991" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="rotation2" type="revolute">
+   <parent link="body1"/>
+   <child link="body2"/>
+   <axis xyz="0 1 0"/>
+   <limit lower="-1.74533" upper="2.26893" effort="10.0" velocity="5.0"/>
+   <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+  </joint>
+
+  <joint name="rotation3" type="revolute">
+   <parent link="body2"/>
+   <child link="body3"/>
+   <axis xyz="0 1 0"/>
+   <limit lower="-3.49066" upper="1.22173" effort="10.0" velocity="5.0"/>   
+   <origin xyz="0 0 ${rot3_z}" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="rotation4" type="revolute">
+   <parent link="body3"/>
+   <child link="body4"/>
+   <axis xyz="0 0 1"/>
+   <limit lower="-4.71239" upper="4.71239" effort="10.0" velocity="5.0"/>
+   <origin xyz="0.29 0 ${rot4_z}" rpy="0 1.5708 0"/>
+  </joint>
+  
+  <joint name="rotation5" type="revolute">
+   <parent link="body4"/>
+   <child link="body5"/>
+   <axis xyz="0 1 0"/>
+   <limit lower="-2.26893" upper="2.26893" effort="10.0" velocity="5.0"/>
+   <origin xyz="0 0 0.161" rpy="0 0 0"/>
+  </joint>
+  
+  <joint name="rotation6" type="revolute">
+   <parent link="body5"/>
+   <child link="body6"/>
+   <axis xyz="0 0 1"/>
+   <limit lower="-6.98132" upper="6.98132" effort="10.0" velocity="5.0"/>
+   <origin xyz="${rot6_x} 0 0" rpy="0 -1.5708 0"/>
+  </joint>
+</robot>
